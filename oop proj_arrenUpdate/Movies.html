@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GoodSeats Navbar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: white;
+    }
+
+    .navbar {
+      background-color: #1e2a35;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      flex: 1;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 32px;
+      color: #ffffff;
+    }
+
+    .search-container {
+      position: relative;
+    }
+
+    .search-container input {
+      padding: 10px 40px 10px 40px;
+      border-radius: 30px;
+      border: none;
+      outline: none;
+      width: 250px;
+      font-size: 18px;
+    }
+
+    .search-container::before {
+      content: '🔍';
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #888;
+    }
+
+    .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      margin-left: 15px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: #41bdbd;
+      border-color: #41bdbd;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .user-menu {
+      position: relative;
+    }
+
+    .user-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .user-icon {
+      color: #41bdbd;
+      font-size: 40px;
+    }
+
+    .caret-icon {
+      color: #41bdbd;
+      font-size: 18px;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 45px;
+      background-color: #1e2a35;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      min-width: 150px;
+      z-index: 10;
+      flex-direction: column;
+    }
+
+    .dropdown a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .dropdown a:hover {
+      background-color: #2c3e50;
+    }
+
+    .main-content {
+      padding: 20px;
+      background-color: #111;
+    }
+
+    .banner {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
+      position: relative;
+    }
+
+    .banner-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      border-left: 5px solid #41bdbd;
+      padding-left: 15px;
+    }
+
+    .movie-list {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .movie-card {
+      background-color: #1e2a35;
+      padding: 15px;
+      border-radius: 10px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .movie-card h4 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .movie-card a.button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color: #41bdbd;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .movie-card a.button:hover {
+      background-color: #34a1a1;
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .navbar-left {
+        justify-content: center;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        position: static;
+        transform: none;
+        margin: 10px 0;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .search-container input {
+        width: 200px;
+      }
+
+      .navbar-right {
+        margin-top: 10px;
+      }
+
+      .movie-list {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-left">
+      <div class="logo">GoodSeats</div>
+      <div class="search-container">
+        <input type="text" placeholder="Search...">
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="HomePage.html">Home</a>
+      <a href="Movies.html">Movies</a>
+      <a href="Cinema.html">Cinema</a>
+    </div>
+
+    <div class="navbar-right">
+      <div class="user-menu">
+        <div class="user-toggle" onclick="toggleDropdown()">
+          <i class="fas fa-user-circle user-icon"></i>
+          <i class="fas fa-caret-down caret-icon"></i>
+        </div>
+        <div class="dropdown" id="dropdownMenu">
+          <a href="Profile.html">Profile</a>
+          <a href="LandingPage.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="banner" id="banner" style="background-image: url('Images/welcome-page.jpg');">
+      <div class="banner-text" id="bannerText">Welcome to GoodSeats</div>
+    </div>
+
+    <!-- Horror Section -->
+<div class="section-title">Horror</div>
+<div class="movie-list">
+  <div class="movie-card">
+    <img src="horror1.jpg" alt="">
+    <h4>The Haunting Shadows</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱320</span> • 1.2k likes</p>
+    <a href="BookingPage.html?movie=The%20Haunting%20Shadows&price=320" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="horror2.jpg" alt="">
+    <h4>Whispers in the Dark</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱280</span> • 980 likes</p>
+    <a href="BookingPage.html?movie=Whispers%20in%20the%20Dark&price=280" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="horror3.jpg" alt="">
+    <h4>The Cursed Manor</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱300</span> • 1.5k likes</p>
+    <a href="BookingPage.html?movie=The%20Cursed%20Manor&price=300" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="horror4.jpg" alt="">
+    <h4>Night of the Howlers</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱290</span> • 870 likes</p>
+    <a href="BookingPage.html?movie=Night%20of%20the%20Howlers&price=290" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="horror5.jpg" alt="">
+    <h4>Silent Screams</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱310</span> • 1.1k likes</p>
+    <a href="BookingPage.html?movie=Silent%20Screams&price=310" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="horror6.jpg" alt="">
+    <h4>Phantom's Curse</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱270</span> • 950 likes</p>
+    <a href="BookingPage.html?movie=Phantom's%20Curse&price=270" class="button">Book Now</a>
+  </div>
+</div>
+
+<!-- Comedy Section -->
+<div class="section-title">Comedy</div>
+<div class="movie-list">
+  <div class="movie-card">
+    <img src="comedy1.jpg" alt="">
+    <h4>Laugh Out Loud</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱250</span> • 2.3k likes</p>
+    <a href="BookingPage.html?movie=Laugh%20Out%20Loud&price=250" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="comedy2.jpg" alt="">
+    <h4>The Misadventures</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱240</span> • 1.9k likes</p>
+    <a href="BookingPage.html?movie=The%20Misadventures&price=240" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="comedy3.jpg" alt="">
+    <h4>Roommates from Mars</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱260</span> • 2.1k likes</p>
+    <a href="BookingPage.html?movie=Roommates%20from%20Mars&price=260" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="comedy4.jpg" alt="">
+    <h4>Operation: Best Man</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱230</span> • 1.7k likes</p>
+    <a href="BookingPage.html?movie=Operation:%20Best%20Man&price=230" class="button">Book Now</a>
+</div>
+  <div class="movie-card">
+    <img src="comedy5.jpg" alt="">
+    <h4>Weekend Warriors</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱255</span> • 2.5k likes</p>
+    <a href="BookingPage.html?movie=Weekend%20Warriors&price=255" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="comedy6.jpg" alt="">
+    <h4>The Pranksters</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱245</span> • 2.0k likes</p>
+    <a href="BookingPage.html?movie=The%20Pranksters&price=245" class="button">Book Now</a>
+  </div>
+</div>
+
+<!-- Drama Section -->
+<div class="section-title">Drama</div>
+<div class="movie-list">
+  <div class="movie-card">
+    <img src="drama1.jpg" alt="">
+    <h4>Beneath the Stars</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱310</span> • 1.8k likes</p>
+    <a href="BookingPage.html?movie=Beneath%20the%20Stars&price=310" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="drama2.jpg" alt="">
+    <h4>Broken Ties</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱295</span> • 1.6k likes</p>
+    <a href="BookingPage.html?movie=Broken%20Ties&price=295" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="drama3.jpg" alt="">
+    <h4>Seasons of Love</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱305</span> • 2.2k likes</p>
+    <a href="BookingPage.html?movie=Seasons%20of%20Love&price=305" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="drama4.jpg" alt="">
+    <h4>Edge of Tomorrow</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱320</span> • 1.5k likes</p>
+    <a href="BookingPage.html?movie=Edge%20of%20Tomorrow&price=320" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="drama5.jpg" alt="">
+    <h4>The Silent Goodbye</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱285</span> • 1.9k likes</p>
+    <a href="BookingPage.html?movie=The%20Silent%20Goodbye&price=285" class="button">Book Now</a>
+  </div>
+  <div class="movie-card">
+    <img src="drama6.jpg" alt="">
+    <h4>Waves of Destiny</h4>
+    <p><span style="color: rgb(98, 227, 98);">₱300</span> • 2.0k likes</p>
+    <a href="BookingPage.html?movie=Waves%20of%20Destiny&price=300" class="button">Book Now</a>
+  </div>
+</div>
+
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdownMenu");
+      dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+    }
+
+    window.addEventListener('click', function(e) {
+      const userMenu = document.querySelector('.user-menu');
+      if (!userMenu.contains(e.target)) {
+        document.getElementById("dropdownMenu").style.display = "none";
+      }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('.search-container input');
+    const movieCards = document.querySelectorAll('.movie-card');
+
+    searchInput.addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+
+      movieCards.forEach(card => {
+        const title = card.querySelector('h4').textContent.toLowerCase();
+        if (title.includes(query)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+  </script>
+
+</body>
+</html>

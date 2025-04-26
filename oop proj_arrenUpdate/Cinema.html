@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinema Booking Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: white;
+      padding: 20px;
+    }
+
+    .form-section {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: #1e2a35;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+
+    select, input[type="text"], input[type="email"], input[type="number"], input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .confirm-btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      background-color: #41bdbd;
+      color: white;
+      border: none;
+    }
+
+    .confirm-btn:hover {
+      background-color: #34a1a1;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      background-color: #1e2a35;
+      margin: 10% auto;
+      padding: 40px;
+      border-radius: 15px;
+      color: white;
+      text-align: center;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content h2 {
+      color: #41bdbd;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .modal-content p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .modal-content button {
+      padding: 12px 30px;
+      background-color: #00b894;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background-color: #019875;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-section">
+    <h2 class="movie-title">Select Cinema Branch</h2>
+
+    <label for="cinema-branch">Choose Cinema Branch</label>
+    <select id="cinema-branch">
+      <option value="GoodSeats Quezon City, Central Ave, near New Era University" selected>
+        GoodSeats Quezon City, Central Ave, near New Era University
+      </option>
+      <!-- Additional cinema branches can be added here later -->
+    </select>
+
+    <button class="confirm-btn" onclick="confirmCinemaSelection()">Confirm Cinema</button>
+  </div>
+
+  <!-- Modal -->
+  <div id="confirmation-modal" class="modal">
+    <div class="modal-content">
+      <h2>Branch Location Successfully Set!</h2>
+      <p>You have successfully set the cinema branch to "GoodSeats Quezon City, Central Ave, near New Era University".</p>
+      <button onclick="goBackToHomePage()">Back to Homepage</button>
+    </div>
+  </div>
+
+  <script>
+    function confirmCinemaSelection() {
+      const cinemaBranch = document.getElementById('cinema-branch').value;
+      // Show the modal
+      document.getElementById('confirmation-modal').style.display = 'block';
+    }
+
+    function goBackToHomePage() {
+      window.location.href = "HomePage.html"; 
+    }
+
+    // Close the modal if the user clicks outside of it
+    window.onclick = function(event) {
+      const modal = document.getElementById('confirmation-modal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
